@@ -1,13 +1,10 @@
 ﻿//Напишите программу, которая принимает на вход трёхзначное число и на выходе показывает вторую цифру этого числа.
 
-int number = ReadInt("Введите трехзначное число: ");
-int amount = number.ToString().Length;
+string Number(int num)
+{   
+    if ((-1000 < num && num < -100) || (num < 1000 && num > 100))
+        return $"{num / 10 % 10}";
+    return "The number is not three-digit!";
+}
 
-if (amount < 3 || amount > 3)
-{
-    Console.WriteLine("Вы ввели не трехзначное число");
-}
-else
-{
-    Console.WriteLine(number);
-}
+Console.WriteLine(Number(int.Parse(Console.ReadLine())));
