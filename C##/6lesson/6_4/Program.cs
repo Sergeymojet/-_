@@ -1,54 +1,45 @@
-﻿// 4. Задайте двумерный массив. Введите элемент, и найдите первое его вхождение,
-//    выведите позиции по горизонтали и вертикали, или напишите, что такого элемента нет.
+﻿// 4. Напишите программу, которая будет создавать
+//    копию заданного массива с помощью поэлементного копирования.
 
+// -----------------------------------------------------1 вариант
 
-void Print(int[,] arr)
+void Print(double[] arr)
 {
-    int row_size = arr.GetLength(0);
-    int column_size = arr.GetLength(1);
+    int size = arr.Length;
 
-    for (int i = 0; i < row_size; i++)
+    for (int i = 0; i < size; i++)
     {
-        for (int j = 0; j < column_size; j++)        
-            Console.Write($" {arr[i, j]} ");        
-        Console.WriteLine();
+        Console.Write($"{arr[i]} ");
     }
     Console.WriteLine();
 }
 
-int[,] MassNums(int row, int column, int from, int to)
+double[] MassNums(int size, int from, int to)
 {
-    int[,] arr = new int[row, column];
+    double[] arr = new double[size];
+    Random n_new = new Random();
 
-    for (int i = 0; i < row; i++)    
-        for (int j = 0; j < column; j++)        
-            arr[i, j] = new Random().Next(from, to);          
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = Math.Round(n_new.NextDouble() * (10 + 20) - 10, 2);
+    }
     return arr;
 }
 
-string OccurrenceElement(int[,] arr, int num)
+double[] CopyMass(double[] arr)
 {
-    int row = arr.GetLength(0);
-    int column = arr.GetLength(1);
-    
-    for (int i = 0; i < row; i++)    
-        for (int j = 0; j < column; j++)        
-            if (arr[i, j] == num) return $"[{i + 1}, {j + 1}]";
+    int size = arr.Length;
+    double[] new_arr = new double[size];
 
-    return "no";       
+    for (int i = 0; i < size; i++)
+    {
+        new_arr[i] = arr[i];
+    }
+    return new_arr;
 }
 
-Console.Write("Enter the number of rows: ");
-int row = int.Parse(Console.ReadLine());
-Console.Write("Enter the number of columns: ");
-int column = int.Parse(Console.ReadLine());
-Console.Write("Enter a number to search for: ");
-int number = int.Parse(Console.ReadLine());
-
-int[,] arr_1 = MassNums(row, column,
-                        int.Parse(Console.ReadLine()),
-                        int.Parse(Console.ReadLine()));
+double[] arr_1 = MassNums(5, 1, 11);
 Print(arr_1);
-
-Console.Write($"Element {number} located in the matrix - {OccurrenceElement(arr_1, number)}"); 
+double[] arr_1_new = CopyMass(arr_1);
+Print(arr_1_new);
 
